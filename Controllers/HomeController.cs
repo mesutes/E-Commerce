@@ -12,6 +12,7 @@ namespace E_Commerce.Controllers
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
+            //aciklama
         }
 
         public IActionResult Index()
