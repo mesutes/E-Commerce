@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace E_Commerce.Migrations
 {
     [DbContext(typeof(E_CommerceContext))]
-    [Migration("20200914205637_initialcreate")]
+    [Migration("20200916202058_initialcreate")]
     partial class initialcreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -23,8 +23,10 @@ namespace E_Commerce.Migrations
 
             modelBuilder.Entity("E_Commerce.Entities.Adress", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("AddedBy")
                         .HasColumnType("nvarchar(max)");
@@ -35,18 +37,13 @@ namespace E_Commerce.Migrations
                     b.Property<string>("Adres")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("CustomerAdressId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("CustomerId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int?>("CustomerId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("ModifyDate")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CustomerAdressId");
 
                     b.HasIndex("CustomerId");
 
@@ -55,8 +52,10 @@ namespace E_Commerce.Migrations
 
             modelBuilder.Entity("E_Commerce.Entities.Category", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("AddedBy")
                         .HasColumnType("nvarchar(max)");
@@ -70,20 +69,17 @@ namespace E_Commerce.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ProductId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("ProductId");
 
                     b.ToTable("Categories");
                 });
 
             modelBuilder.Entity("E_Commerce.Entities.Customer", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("AddedBy")
                         .HasColumnType("nvarchar(max)");
@@ -97,23 +93,20 @@ namespace E_Commerce.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("PhoneNumberId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("SurName")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("PhoneNumberId");
 
                     b.ToTable("Customers");
                 });
 
             modelBuilder.Entity("E_Commerce.Entities.CustomerAdress", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("AddedBy")
                         .HasColumnType("nvarchar(max)");
@@ -121,23 +114,20 @@ namespace E_Commerce.Migrations
                     b.Property<DateTime>("AddedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("CustomerID")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<DateTime>("ModifyDate")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CustomerID");
 
                     b.ToTable("CustomerAdresses");
                 });
 
             modelBuilder.Entity("E_Commerce.Entities.Order", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("AddedBy")
                         .HasColumnType("nvarchar(max)");
@@ -155,8 +145,10 @@ namespace E_Commerce.Migrations
 
             modelBuilder.Entity("E_Commerce.Entities.PhoneNumber", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("AddedBy")
                         .HasColumnType("nvarchar(max)");
@@ -167,18 +159,26 @@ namespace E_Commerce.Migrations
                     b.Property<string>("CellPhoneNumber")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("CustomerID")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("ModifyDate")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CustomerID")
+                        .IsUnique();
 
                     b.ToTable("PhoneNumbers");
                 });
 
             modelBuilder.Entity("E_Commerce.Entities.Product", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("AddedBy")
                         .HasColumnType("nvarchar(max)");
@@ -200,36 +200,62 @@ namespace E_Commerce.Migrations
                     b.ToTable("Products");
                 });
 
+            modelBuilder.Entity("E_Commerce.Entities.ProductCategory", b =>
+                {
+                    b.Property<int>("CategoryID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("AddedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("AddedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("ModifyDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("CategoryID", "ProductID");
+
+                    b.HasIndex("ProductID");
+
+                    b.ToTable("ProductCategory");
+                });
+
             modelBuilder.Entity("E_Commerce.Entities.Adress", b =>
                 {
-                    b.HasOne("E_Commerce.Entities.CustomerAdress", null)
-                        .WithMany("adresses")
-                        .HasForeignKey("CustomerAdressId");
-
-                    b.HasOne("E_Commerce.Entities.Customer", null)
+                    b.HasOne("E_Commerce.Entities.Customer", "Customer")
                         .WithMany("Addresses")
                         .HasForeignKey("CustomerId");
                 });
 
-            modelBuilder.Entity("E_Commerce.Entities.Category", b =>
+            modelBuilder.Entity("E_Commerce.Entities.PhoneNumber", b =>
                 {
-                    b.HasOne("E_Commerce.Entities.Product", null)
-                        .WithMany("categories")
-                        .HasForeignKey("ProductId");
+                    b.HasOne("E_Commerce.Entities.Customer", "Customer")
+                        .WithOne("PhoneNumber")
+                        .HasForeignKey("E_Commerce.Entities.PhoneNumber", "CustomerID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
-            modelBuilder.Entity("E_Commerce.Entities.Customer", b =>
+            modelBuilder.Entity("E_Commerce.Entities.ProductCategory", b =>
                 {
-                    b.HasOne("E_Commerce.Entities.PhoneNumber", "PhoneNumber")
-                        .WithMany()
-                        .HasForeignKey("PhoneNumberId");
-                });
+                    b.HasOne("E_Commerce.Entities.Category", "Category")
+                        .WithMany("ProductCategories")
+                        .HasForeignKey("CategoryID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-            modelBuilder.Entity("E_Commerce.Entities.CustomerAdress", b =>
-                {
-                    b.HasOne("E_Commerce.Entities.Customer", "customer")
-                        .WithMany()
-                        .HasForeignKey("CustomerID");
+                    b.HasOne("E_Commerce.Entities.Product", "Product")
+                        .WithMany("ProductCategories")
+                        .HasForeignKey("ProductID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

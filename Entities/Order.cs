@@ -9,7 +9,6 @@ namespace E_Commerce.Entities
     {
         List<Product> products { get; set; }
         Customer customer { get; set; }
-        CustomerAdress customerAdress { get; set; }
 
 
 
