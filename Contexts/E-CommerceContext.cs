@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace E_Commerce.Contexts
 {
-    public class E_CommerceContext:DbContext
+    public class E_CommerceContext : DbContext
     {
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -35,6 +35,7 @@ namespace E_Commerce.Contexts
         public DbSet<Order> Orders { get; set; }
         public DbSet<PhoneNumber> PhoneNumbers { get; set; }
         public DbSet<Product> Products { get; set; }
+        public DbSet<ProductCategory> productCategories { get; set; }
 
     }
 }

@@ -1,13 +1,13 @@
 ﻿using E_Commerce.Entities;
-using E_Commerce.Interfaces;
+using E_Commerce.ViewComponents;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace E_Commerce.Repositories
+namespace E_Commerce.Interfaces
 {
-    public class OrderRepository:GenericRepository<Order>,IOrderRepository
+    public interface ICategoryRepository: IGenericRepository<Category>
     {
     }
 }

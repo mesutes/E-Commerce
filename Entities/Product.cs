@@ -13,7 +13,7 @@ namespace E_Commerce.Entities
         public ICollection<ProductCategory>  ProductCategories { get; set; }
         public int inStock { get; set; }
 
-
+        public decimal Price { get; set; }
 
     }
 }
