@@ -1,4 +1,5 @@
 ﻿using E_Commerce.Entities;
+using E_Commerce.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace E_Commerce.Repositories
 {
-    public class Categoryrepository :GenericRepository<Category>
+    public class Categoryrepository :GenericRepository<Category>,ICategoryRepository
     {
     }
 }
