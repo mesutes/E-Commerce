@@ -5,6 +5,22 @@
     {
       "library": "twitter-bootstrap@4.5.2",
       "destination": "wwwroot/twitter-bootstrap/"
+    },
+    {
+      "library": "jquery-validate@1.19.2",
+      "destination": "wwwroot/jqueryvalid",
+      "files": [ "jquery.validate.min.js" ]
+    },
+    {
+      "library": "jquery-validation-unobtrusive@3.2.11",
+      "destination": "wwwroot/Jqueryunob",
+      "files": [ "jquery.validate.unobtrusive.min.js" ]
+    },
+    {
+      "library": "jquery@3.5.1",
+      "destination": "wwwroot/Jquery",
+      "files": ["jquery.min.js"]
     }
+
   ]
 }

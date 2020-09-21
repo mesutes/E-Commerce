@@ -15,8 +15,8 @@ namespace E_Commerce.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     AddedDate = table.Column<DateTime>(nullable: false),
                     ModifyDate = table.Column<DateTime>(nullable: false),
-                    AddedBy = table.Column<string>(nullable: true),
-                    Name = table.Column<string>(nullable: true)
+                    AddedBy = table.Column<string>(maxLength: 50, nullable: true),
+                    Name = table.Column<string>(maxLength: 50, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -31,7 +31,7 @@ namespace E_Commerce.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     AddedDate = table.Column<DateTime>(nullable: false),
                     ModifyDate = table.Column<DateTime>(nullable: false),
-                    AddedBy = table.Column<string>(nullable: true)
+                    AddedBy = table.Column<string>(maxLength: 50, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -46,9 +46,9 @@ namespace E_Commerce.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     AddedDate = table.Column<DateTime>(nullable: false),
                     ModifyDate = table.Column<DateTime>(nullable: false),
-                    AddedBy = table.Column<string>(nullable: true),
-                    Name = table.Column<string>(nullable: true),
-                    SurName = table.Column<string>(nullable: true)
+                    AddedBy = table.Column<string>(maxLength: 50, nullable: true),
+                    Name = table.Column<string>(maxLength: 20, nullable: true),
+                    SurName = table.Column<string>(maxLength: 20, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -63,7 +63,7 @@ namespace E_Commerce.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     AddedDate = table.Column<DateTime>(nullable: false),
                     ModifyDate = table.Column<DateTime>(nullable: false),
-                    AddedBy = table.Column<string>(nullable: true)
+                    AddedBy = table.Column<string>(maxLength: 50, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -78,9 +78,10 @@ namespace E_Commerce.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     AddedDate = table.Column<DateTime>(nullable: false),
                     ModifyDate = table.Column<DateTime>(nullable: false),
-                    AddedBy = table.Column<string>(nullable: true),
-                    Name = table.Column<string>(nullable: true),
-                    inStock = table.Column<int>(nullable: false)
+                    AddedBy = table.Column<string>(maxLength: 50, nullable: true),
+                    Name = table.Column<string>(maxLength: 100, nullable: true),
+                    inStock = table.Column<int>(nullable: false),
+                    Price = table.Column<decimal>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -95,8 +96,8 @@ namespace E_Commerce.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     AddedDate = table.Column<DateTime>(nullable: false),
                     ModifyDate = table.Column<DateTime>(nullable: false),
-                    AddedBy = table.Column<string>(nullable: true),
-                    Adres = table.Column<string>(nullable: true),
+                    AddedBy = table.Column<string>(maxLength: 50, nullable: true),
+                    Adres = table.Column<string>(maxLength: 250, nullable: true),
                     CustomerId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
@@ -118,8 +119,8 @@ namespace E_Commerce.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     AddedDate = table.Column<DateTime>(nullable: false),
                     ModifyDate = table.Column<DateTime>(nullable: false),
-                    AddedBy = table.Column<string>(nullable: true),
-                    CellPhoneNumber = table.Column<string>(nullable: true),
+                    AddedBy = table.Column<string>(maxLength: 50, nullable: true),
+                    CellPhoneNumber = table.Column<string>(maxLength: 15, nullable: true),
                     CustomerID = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -134,27 +135,28 @@ namespace E_Commerce.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ProductCategory",
+                name: "productCategories",
                 columns: table => new
                 {
                     ProductID = table.Column<int>(nullable: false),
                     CategoryID = table.Column<int>(nullable: false),
-                    Id = table.Column<int>(nullable: false),
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     AddedDate = table.Column<DateTime>(nullable: false),
                     ModifyDate = table.Column<DateTime>(nullable: false),
-                    AddedBy = table.Column<string>(nullable: true)
+                    AddedBy = table.Column<string>(maxLength: 50, nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ProductCategory", x => new { x.CategoryID, x.ProductID });
+                    table.PrimaryKey("PK_productCategories", x => new { x.CategoryID, x.ProductID });
                     table.ForeignKey(
-                        name: "FK_ProductCategory_Categories_CategoryID",
+                        name: "FK_productCategories_Categories_CategoryID",
                         column: x => x.CategoryID,
                         principalTable: "Categories",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ProductCategory_Products_ProductID",
+                        name: "FK_productCategories_Products_ProductID",
                         column: x => x.ProductID,
                         principalTable: "Products",
                         principalColumn: "Id",
@@ -173,8 +175,8 @@ namespace E_Commerce.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_ProductCategory_ProductID",
-                table: "ProductCategory",
+                name: "IX_productCategories_ProductID",
+                table: "productCategories",
                 column: "ProductID");
         }
 
@@ -193,7 +195,7 @@ namespace E_Commerce.Migrations
                 name: "PhoneNumbers");
 
             migrationBuilder.DropTable(
-                name: "ProductCategory");
+                name: "productCategories");
 
             migrationBuilder.DropTable(
                 name: "Customers");
