@@ -20,17 +20,14 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto ">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                    <li class="nav-item">
+                        <a asp-action="Index" asp-controller="Home" class="nav-link">Ana Sayfa</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Features</a>
+                        <a class="nav-link" href="#">Hakkımızda</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Pricing</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                        <a class="nav-link" href="#">İletişim</a>
                     </li>
                 </ul>
             </div>
@@ -45,8 +42,8 @@
     </div>   
 
 </div>
-
-    
+<script src="~/Jquery/jquery.min.js"></script>
+    @RenderSection("JavaScript",false)
        
    
    

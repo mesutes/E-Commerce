@@ -1,24 +1,24 @@
-﻿using E_Commerce.Interfaces;
+﻿using E_Commerce.Entities;
+using E_Commerce.Interfaces;
 using E_Commerce.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System;
 using System.Diagnostics;
+using System.IO;
 
 namespace E_Commerce.Controllers
 {
     public class HomeController : Controller
     {
-        //private readonly ILogger<HomeController> _logger;
-
-        //public HomeController(ILogger<HomeController> logger)
-        //{
-        //    _logger = logger;
-        //}
+        private readonly SignInManager<AppUser> _signInManager;
 
         IProductRepository _ProductRepository;
-        public HomeController(IProductRepository _ProductRepository) 
+        public HomeController(IProductRepository _ProductRepository, SignInManager<AppUser> _signInManager) 
         {
             this._ProductRepository = _ProductRepository;
+            this._signInManager = _signInManager;
 
         }
 
@@ -44,6 +44,32 @@ namespace E_Commerce.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
+        public IActionResult AdminLogin()
+        {
+            return View(new AdminLoginModel());
+        }
+
+        [HttpPost]
+        public IActionResult AdminLogin(AdminLoginModel model)
+        {
+            if (ModelState.IsValid) 
+            {
+                var signinresult = _signInManager.PasswordSignInAsync(model.UserName, model.Password, model.RemindMe, false).Result;
+
+                if (signinresult.Succeeded) 
+                {
+                    return RedirectToAction("Index", "Home", new { area = "Admin" });
+                }
+
+                ModelState.AddModelError("", "Kullanıcı adı veya şifre hatalı");
+
+            }
+            return View(model);
+           
+        }
+
         
+
+
     }
 }

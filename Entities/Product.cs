@@ -12,6 +12,7 @@ namespace E_Commerce.Entities
         public string Name { get; set; }
         public ICollection<ProductCategory>  ProductCategories { get; set; }
         public int inStock { get; set; }
+        public string Picture { get; set; }
 
         public decimal Price { get; set; }
 

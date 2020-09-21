@@ -1,6 +1,7 @@
 ﻿using E_Commerce.Contexts;
 using E_Commerce.Entities;
 using E_Commerce.Interfaces;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,7 @@ namespace E_Commerce.Repositories
 {
     public class ProductRepository : GenericRepository<Product>, IProductRepository
     {
-
+        
         public List<Category> GetCategories(int id)
         {
             using var context = new E_CommerceContext();
